@@ -1,0 +1,73 @@
+{
+  "resourceType" : "Observation",
+    // from Resource: id, метаданные, и язык
+  // from DomainResource: текст, расширения, и modifierExtension
+  "identifier" : [{ Identifier }], // Бизнес-идентификатор для наблюдения
+  "basedOn" : [{ Reference(CarePlan|DeviceRequest|ImmunizationRecommendation|
+   MedicationRequest|NutritionOrder|ServiceRequest) }], // Fulfills plan, proposal or order
+  "partOf" : [{ Reference(MedicationAdministration|MedicationDispense|
+   MedicationStatement|Procedure|Immunization|ImagingStudy) }], // Часть референтного события
+  "status" : "<code>", // R!  registered | preliminary | final | amended +
+  "category" : [{ CodeableConcept }], // Классификация вида наблюдения
+  "code" : { CodeableConcept }, // R!  Type of observation (code / type)
+  "subject" : { Reference(Patient|Group|Device|Location) }, // О ком и/или о чем идет речь в данном наблюдении
+  "focus" : [{ Reference(Any) }], // О чем это наблюдение, когда речь идет не о предмете записи.
+  "encounter" : { Reference(Encounter) }, // Этап траектории, в ходе которого проводится данное наблюдение
+  // effective[x]: Клинически значимое время/период для наблюдения. Один из этих 4-х:
+  "effectiveDateTime" : "<dateTime>",
+  "effectivePeriod" : { Period },
+  "effectiveTiming" : { Timing },
+  "effectiveInstant" : "<instant>",
+  "issued" : "<instant>", // Дата/время, когда эта версия была предоставлена в распоряжение пользователей
+  "performer" : [{ Reference(Practitioner|PractitionerRole|Organization|
+   CareTeam|Patient|RelatedPerson) }], // Кто несет ответственность за наблюдение
+  // value[x]: Фактический результат. Один из этих 11:
+  "valueQuantity" : { Quantity },
+  "valueCodeableConcept" : { CodeableConcept },
+  "valueString" : "<string>",
+  "valueBoolean" : <boolean>,
+  "valueInteger" : <integer>,
+  "valueRange" : { Range },
+  "valueRatio" : { Ratio },
+  "valueSampledData" : { SampledData },
+  "valueTime" : "<time>",
+  "valueDateTime" : "<dateTime>",
+  "valuePeriod" : { Period },
+  "dataAbsentReason" : { CodeableConcept }, // C? Почему результат отсутствует.
+  "interpretation" : [{ CodeableConcept }], // Высокий, низкий, нормальный и т.д..
+  "note" : [{ Annotation }], // Комментарии о наблюдении
+  "bodySite" : { CodeableConcept }, // Наблюдаемая часть тела
+  "method" : { CodeableConcept }, // Как это было сделано
+  "specimen" : { Reference(Specimen) }, // Образец, использованный для этого наблюдения
+  "device" : { Reference(Device|DeviceMetric) }, // ( Измерительное) устройство
+  "referenceRange" : [{ // Содержит руководство по интерпретации
+    "low" : { Quantity(SimpleQuantity) }, // C? Низкий диапазон, если это уместно
+    "high" : { Quantity(SimpleQuantity) }, // C? Высокий диапазон, если это уместно
+    "type" : { CodeableConcept }, // Квалификатор эталонного диапазона
+    "appliesTo" : [{ CodeableConcept }], // Популяция референтного диапазона
+    "age" : { Range }, // Применимый возрастной диапазон, если применимо
+    "text" : "<string>" // Референсный диапазон в текстовом виде
+  }],
+  "hasMember" : [{ Reference(Observation|QuestionnaireResponse|
+   MolecularSequence) }], // Связанный с этим ресурс, относящийся к группе Observation
+  "derivedFrom" : [{ Reference(DocumentReference|ImagingStudy|Media|
+   QuestionnaireResponse|Observation|MolecularSequence) }], // Соответствующие измерения, полученные в ходе наблюдения
+  "component" : [{ // Результаты по компонентам
+    "code" : { CodeableConcept }, // R!  Вид наблюдения компонента (код / тип)
+    // value[x]: Фактический результат компонента. Один из этих 11:
+    "valueQuantity" : { Quantity },
+    "valueCodeableConcept" : { CodeableConcept },
+    "valueString" : "<string>",
+    "valueBoolean" : <boolean>,
+    "valueInteger" : <integer>,
+    "valueRange" : { Range },
+    "valueRatio" : { Ratio },
+    "valueSampledData" : { SampledData },
+    "valueTime" : "<time>",
+    "valueDateTime" : "<dateTime>",
+    "valuePeriod" : { Period },
+    "dataAbsentReason" : { CodeableConcept }, // C? Почему компонентный результат отсутствует
+    "interpretation" : [{ CodeableConcept }], // Высокий, низкий, нормальный и т.д.
+    "referenceRange" : [{ Content as for Observation.referenceRange }] // Содержит руководство по интерпретации компонентного результата
+  }]
+}
