@@ -1,0 +1,31 @@
+{
+  "resourceType" : "DiagnosticReport",
+    // from Resource: id, метаданные, и язык
+  // from DomainResource: текст, расширения, и modifierExtension
+  "identifier" : [{ Identifier }], // Бизнес идентификатор для отчета
+  "basedOn" : [{ Reference(CarePlan|ImmunizationRecommendation|
+   MedicationRequest|NutritionOrder|ServiceRequest) }], // Что было запрошено
+  "status" : "<code>", // R!  registered | partial | preliminary | final +
+  "category" : [{ CodeableConcept }], // Категория услуги
+  "code" : { CodeableConcept }, // R!  Имя/код для данного диагностического отчета
+  "subject" : { Reference(Patient|Group|Device|Location) }, // Предмет отчета - обычно, но не всегда, пациент.
+  "encounter" : { Reference(Encounter) }, // События со здоровьем при заказе теста
+  // effective[x]: Клинически значимое время/период времени для отчета. Один из этих двух:
+  "effectiveDateTime" : "<dateTime>",
+  "effectivePeriod" : { Period },
+  "issued" : "<instant>", // Дата Время, когда эта версия была сделана
+  "performer" : [{ Reference(Practitioner|PractitionerRole|Organization|
+   CareTeam) }], // Responsible Diagnostic Service
+  "resultsInterpreter" : [{ Reference(Practitioner|PractitionerRole|
+   Organization|CareTeam) }], // Главный интерпретатор результатов
+  "specimen" : [{ Reference(Specimen) }], // В основе данного отчета лежат следующие образцы
+  "result" : [{ Reference(Observation) }], // Наблюдения
+  "imagingStudy" : [{ Reference(ImagingStudy) }], // Ссылка на изображения, связанные с диагностическим отчетом
+  "media" : [{ // Ключевые изображения, связанные с данным отчетом
+    "comment" : "<string>", // Комментарий к изображению (например, пояснение)
+    "link" : { Reference(Media) } // R!  Ссылка на источник изображения
+  }],
+  "conclusion" : "<string>", // Клиническое заключение (интерпретация) результатов исследования
+  "conclusionCode" : [{ CodeableConcept }], // Коды для клинического заключения результатов исследований
+  "presentedForm" : [{ Attachment }] // Выпущенный отчет в полном объеме
+}
