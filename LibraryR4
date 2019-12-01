@@ -1,0 +1,36 @@
+{
+  "resourceType" : "Library",
+    // from Resource: id, метаданные, и язык
+  // from DomainResource: текст, расширения, и modifierExtension
+  "url" : "<uri>", // Канонический идентификатор для этой библиотеки, представленный в виде URI (уникальный в глобальном масштабе)
+  "identifier" : [{ Identifier }], // Дополнительный идентификатор библиотеки  "version" : "<string>", // Бизнес-версия библиотеки
+  "name" : "<string>", // C? Имя этой библиотеки (computer friendly)
+  "title" : "<string>", // Имя этой библиотеки (human friendly)
+  "subtitle" : "<string>", // Субординированное название библиотеки
+  "status" : "<code>", // R!  draft | active | retired | unknown
+  "experimental" : <boolean>, // Для целей тестирования, не реальное использование
+  "type" : { CodeableConcept }, // R!  logic-library | model-definition | asset-collection | module-definition
+  // subject[x]: Тип индивидуума, на котором сосредоточено содержание библиотеки. Один из этих двух:
+  "subjectCodeableConcept" : { CodeableConcept },
+  "subjectReference" : { Reference(Group) },
+  "date" : "<dateTime>", // Дата последнего изменения
+  "publisher" : "<string>", // Наименование издателя (организации или физического лица)
+  "contact" : [{ ContactDetail }], // Контактные данные издателя
+  "description" : "<markdown>", // Описание библиотеки на естественном языке
+  "useContext" : [{ UsageContext }], // Контекст, который содержание должно поддерживать
+  "jurisdiction" : [{ CodeableConcept }], // Предполагаемая юрисдикция для библиотеки (если применимо)
+  "purpose" : "<markdown>", // С какой целью реализована эта библиотека
+  "usage" : "<string>", // Описывает клиническое использование библиотеки
+  "copyright" : "<markdown>", // Ограничения на использование и/или публикацию
+  "approvalDate" : "<date>", // Когда библиотека была одобрена издателем.
+  "lastReviewDate" : "<date>", // Когда библиотека в последний раз пересматривалась.
+  "effectivePeriod" : { Period }, // Когда предполагается использование библиотеки
+  "topic" : [{ CodeableConcept }], // Например, образование, лечение, оценка и т.д.
+  "author" : [{ ContactDetail }], // Автор библиотеки
+  "editor" : [{ ContactDetail }], // Редактор библиотеки
+  "reviewer" : [{ ContactDetail }], // Рецензент библиотеки
+  "endorser" : [{ ContactDetail }], // Кто одобрил содержимое
+  "relatedArtifact" : [{ RelatedArtifact }], // Дополнительная документация, ссылки и т.д.
+  "parameter" : [{ ParameterDefinition }], // Параметры, задаваемые библиотекой
+  "dataRequirement" : [{ DataRequirement }], // На какие данные ссылается эта библиотека.
+  "content" : [{ Attachment }] // Содержание библиотеки, как встроенное, так и со ссылками на него
