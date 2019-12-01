@@ -1,0 +1,24 @@
+{
+  "resourceType" : "CareTeam",
+    // from Resource: id, метаданные, и язык
+  // from DomainResource: текст, расширения, и modifierExtension
+  "identifier" : [{ Identifier }], // Внешние идентификаторы для команды лечения
+  "status" : "<code>", // proposed | active | suspended | inactive | entered-in-error
+  "category" : [{ CodeableConcept }], // Тип команды
+  "name" : "<string>", // Название группы, например, группа по оценке кризисных ситуаций
+  "subject" : { Reference(Patient|Group) }, // Для кого создается команда лечения
+  "encounter" : { Reference(Encounter) }, // Прием, созданный в рамках лечения
+  "period" : { Period }, // Время, на которое создается команда
+  "participant" : [{ // C? Члены команды
+    "role" : [{ CodeableConcept }], // Тип участия
+    "member" : { Reference(Practitioner|PractitionerRole|RelatedPerson|Patient|
+    Organization|CareTeam) }, // Кто участвует
+    "onBehalfOf" : { Reference(Organization) }, // Организация в которой работает врач
+    "period" : { Period } // Период участия в команде
+  }],
+  "reasonCode" : [{ CodeableConcept }], // Причина создания команды
+  "reasonReference" : [{ Reference(Condition) }], // Причина создания команды
+  "managingOrganization" : [{ Reference(Organization) }], // Организация, ответственная за команду лечения
+  "telecom" : [{ ContactPoint }], // Контактная информация команды лечения (которая относится ко всем участникам)
+  "note" : [{ Annotation }] // Комментарии о команде CareTeam
+}
