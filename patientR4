@@ -1,0 +1,40 @@
+{
+  "resourceType" : "Patient",
+  // from Resource: id, метаданные, и язык
+  // from DomainResource: текст, расширения, и modifierExtension
+  "identifier" : [{ Identifier }], // Идентификатор пациента
+  "active" : <boolean>, // Активна ли эта карточка пациента.
+  "name" : [{ HumanName }], // ФИО пациента
+  "telecom" : [{ ContactPoint }], // Контактное лицо
+  "gender" : "<code>", // мужской | женский | другой | неизвестно
+  "birthDate" : "<date>", // Дата рождения
+  // deceased[x]: Указывает, умер ли пациент. Одно из 2х полей:
+  "deceasedBoolean" : <boolean>,
+  "deceasedDateTime" : "<dateTime>",
+  "address" : [{ Address }], // Адрес
+  "maritalStatus" : { CodeableConcept }, // Семейное положение
+  // multipleBirth[x]: Является ли пациент ребенком, родившемся в результате многоплодных родов. Одно поле из 2х:
+  "multipleBirthBoolean" : <boolean>,
+  "multipleBirthInteger" : <integer>,
+  "photo" : [{ Attachment }], // Фотография
+  "contact" : [{ // Контактное лицо (например, законный представитель, партнер, родственник) for the patient
+    "relationship" : [{ CodeableConcept }], // Тип связи
+    "name" : { HumanName }, // Имя контактного лица
+    "telecom" : [{ ContactPoint }], // Способ связи с контактным лицом
+    "address" : { Address }, // Адрес
+    "gender" : "<code>", //пол: мужской | женский | другой | неизвестный
+    "organization" : { Reference(Organization) }, // Организация, с которой связано контактное лицо
+    "period" : { Period } // Период, в течение которого с этим контактным лицом или организацией можно связаться в отношении данного пациента.
+  }],
+  "communication" : [{ // Язык, который может быть использован для общения с пациентом по вопросам его здоровья
+    "language" : { CodeableConcept }, //  Язык, который может быть использован для общения с пациентом по вопросам его здоровья
+    "preferred" : <boolean> // Индикатор предпочтения языка
+  }],
+  "generalPractitioner" : [{ Reference(Organization|Practitioner|
+   PractitionerRole) }], // Выбранный пациентом провайдер медицинской помощи (семейный врач)
+  "managingOrganization" : { Reference(Organization) }, // Организация, которая является хранителем медицинской карты пациента
+  "link" : [{ // Связь с другим ресурсом Patient, который касается того же самого человека.
+    "other" : { Reference(Patient|RelatedPerson) }, // Другой пациент или связанный с ним ресурс, на который ссылается ссылка.
+    "type" : "<code>" // replaced-by | replaces | refer | seealso
+  }]
+}
