@@ -1,0 +1,105 @@
+{
+  "resourceType" : "PlanDefinition",
+    // from Resource: id, метаданные, и язык
+  // from DomainResource: текст, расширения, и modifierExtension
+  "url" : "<uri>", // Канонический идентификатор для данного PlanDefinition, представленный в виде URI-идентификатора (глобально уникальный)
+  "identifier" : [{ Identifier }], // Дополнительный идентификатор для PlanDefinition
+  "version" : "<string>", // Бизнес-версия PlanDefinition
+  "name" : "<string>", // Название для данного PlanDefinition (дружелюбное к компьютеру)
+  "title" : "<string>", // Название для данного PlanDefinition (дружелюбное к человеку)
+  "subtitle" : "<string>", // Название нижестоящего плана
+  "type" : { CodeableConcept }, // order-set | clinical-protocol | eca-rule | workflow-definition
+  "status" : "<code>", // R!  draft | active | retired | unknown
+  "experimental" : <boolean>, // Для целей тестирования, не реальное использование
+  // subject[x]: Тип индивидуума, на которого ориентирован PlanDefinition. Одно из 2х:
+  "subjectCodeableConcept" : { CodeableConcept },
+  "subjectReference" : { Reference(Group) },
+  "date" : "<dateTime>", // Дата последнего изменения
+  "publisher" : "<string>", // Наименование издателя (организации или физического лица)
+  "contact" : [{ ContactDetail }], // Контактные данные издателя
+  "description" : "<markdown>", // Описание плана на естественном языке
+  "useContext" : [{ UsageContext }], // Контекст, который должен поддерживать данный PlanDefinition
+  "jurisdiction" : [{ CodeableConcept }], // Предполагаемая юрисдикция для PlanDefition (если применимо)
+  "purpose" : "<markdown>", // Причина разработки данного PlanDefition
+  "usage" : "<string>", // Описывает клиническое использование плана
+  "copyright" : "<markdown>", // Ограничения на использование и/или публикации
+  "approvalDate" : "<date>", // Когда PlanDefinition был утвержден разработчиком.
+  "lastReviewDate" : "<date>", // Когда PlanDefinition в последний раз пересматривался
+  "effectivePeriod" : { Period }, // Сроки предполагаемого использования PlanDefinition
+  "topic" : [{ CodeableConcept }], // Например, образование, лечение, оценка состояния здоровья
+  "author" : [{ ContactDetail }], // Кто является автором PlanDefinition
+  "editor" : [{ ContactDetail }], // Кто редактировал PlanDefinition
+  "reviewer" : [{ ContactDetail }], // Кто рецензировал PlanDefinition
+  "endorser" : [{ ContactDetail }], // Кто одобрил PlanDefinition
+  "relatedArtifact" : [{ RelatedArtifact }], // Дополнительная документация, ссылки
+  "library" : [{ canonical(Library) }], // Логика, используемая в PlanDefinition
+  "goal" : [{ // Цель реализации плана
+    "category" : { CodeableConcept }, // Например, лечение, диетическое питание, поведенческие аспекты
+    "description" : { CodeableConcept }, // Код или текст, описывающий цель    "priority" : { CodeableConcept }, // high-priority | medium-priority | low-priority
+    "start" : { CodeableConcept }, // Когда начинается реализация плана
+    "addresses" : [{ CodeableConcept }], // Какова цель плана
+    "documentation" : [{ RelatedArtifact }], // Вспомогательная документация для достижения цели
+    "target" : [{ // Целевой результат для достижения цели
+      "measure" : { CodeableConcept }, // Параметр, значение которого должно отслеживаться
+      // detail[x]: Целевое значение, которое должно быть достигнуто. Один из этих трех:
+      "detailQuantity" : { Quantity },
+      "detailRange" : { Range },
+      "detailCodeableConcept" : { CodeableConcept },
+      "due" : { Duration } // Достигнуть цели в рамках
+    }]
+  }],
+  "action" : [{ // Действия, определенные планом
+    "prefix" : "<string>", // Видимый пользователю префикс действия (например, 1 или А).
+    "title" : "<string>", // Видимый пользователю название
+    "description" : "<string>", // Краткое описание действия
+    "textEquivalent" : "<string>", // Статический текстовый эквивалент действия, используемый, если динамические аспекты не могут быть интерпретированы принимающей системой.
+    "priority" : "<code>", // routine | urgent | asap | stat
+    "code" : [{ CodeableConcept }], // Код, представляющий значение действия или поддействия    "reason" : [{ CodeableConcept }], // Почему необходимо выполнить действие
+    "documentation" : [{ RelatedArtifact }], // Вспомогательная документация для предполагаемого исполнителя мероприятия
+    "goalId" : ["<id>"], // Какие цели поддерживает данное действие
+    // subject[x]: Тип человека, на котором сфокусировано действие. Один из этих двух:
+    "subjectCodeableConcept" : { CodeableConcept },
+    "subjectReference" : { Reference(Group) },
+    "trigger" : [{ TriggerDefinition }], // Когда действие должно быть инициировано.
+    "condition" : [{ // Применимо ли действие или нет
+      "kind" : "<code>", // применимость | начало | завершение
+      "expression" : { Expression } // булевское выражение
+    }],
+    "input" : [{ DataRequirement }], // Требования к входным данным
+    "output" : [{ DataRequirement }], // Требования к выходным данным
+    "relatedAction" : [{ // Связь с другим действием
+      "actionId" : "<id>", // Какие действия связаны с этим
+      "relationship" : "<code>", // R!  before-start | before | before-end | concurrent-with-start | concurrent | concurrent-with-end | after-start | after | after-end
+      // offset[x]: Смещение по времени для отношений. Один из этих двух:
+      "offsetDuration" : { Duration }
+      "offsetRange" : { Range }
+    }],
+    // timing[x]: Когда должно произойти действие. Один из этих 6:
+    "timingDateTime" : "<dateTime>",
+    "timingAge" : { Age },
+    "timingPeriod" : { Period },
+    "timingDuration" : { Duration },
+    "timingRange" : { Range },
+    "timingTiming" : { Timing },
+    "participant" : [{ // Кто должен участвовать в действии
+      "type" : "<code>", // R!  patient | practitioner | related-person | device
+      "role" : { CodeableConcept } // Например, медсестра, хирург, родитель
+    }],
+    "type" : { CodeableConcept }, // create | update | remove | fire-event
+    "groupingBehavior" : "<code>", // visual-group | logical-group | sentence-group
+    "selectionBehavior" : "<code>", // any | all | all-or-none | exactly-one | at-most-one | one-or-more
+    "requiredBehavior" : "<code>", // must | could | must-unless-documented
+    "precheckBehavior" : "<code>", // yes | no
+    "cardinalityBehavior" : "<code>", // single | multiple
+    // definition[x]: Описание предстоящей деятельности. Один из этих двух:
+    "definitionCanonical" : { canonical(ActivityDefinition|PlanDefinition|
+    Questionnaire) },
+    "definitionUri" : "<uri>",
+    "transform" : { canonical(StructureMap) }, // Трансформация для применения шаблона
+    "dynamicValue" : [{ // Динамические аспекты определения
+      "path" : "<string>", // Путь к динамически устанавливаемому элементу
+      "expression" : { Expression } // Выражение, которое обеспечивает динамическое значение для настройки.
+    }],
+    "action" : [{ Content as for PlanDefinition.action }] // Поддействие
+  }]
+}
