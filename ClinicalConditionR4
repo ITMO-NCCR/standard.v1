@@ -1,0 +1,13 @@
+{
+  "resourceType" : "ClinicalCondition",
+    // from Resource: id, метаданные, и язык
+  // from DomainResource: текст, расширения, и modifierExtension
+  "identifier" : [{ Identifier }], // Внешние идентификаторы
+  "status" : "<code>", // proposed | active | suspended | inactive | entered-in-error
+  "category" : [{ CodeableConcept }], // Тип условия
+  "name" : "<string>", // Ноименование условия
+  "predecessor" : { Reference(TrajectoryStep) }, // ссылка на этап-предшественник
+  "successor" : { Reference(TrajectoryStep) }, // ссылка на последующий шаг
+  "condition" : { Reference(Library) }, // ссылка на логику условия
+  "note" : [{ Annotation }] // Комментарий
+}
