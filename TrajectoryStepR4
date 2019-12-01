@@ -1,0 +1,23 @@
+{
+  "resourceType" : "TrajectoryStep",
+    // from Resource: id, метаданные, и язык
+  // from DomainResource: текст, расширения, и modifierExtension
+  "identifier" : [{ Identifier }], // Внешние идентификаторы
+  "status" : "<code>", // proposed | active | suspended | inactive | entered-in-error
+  "category" : [{ CodeableConcept }], // Тип этапа
+  "name" : "<string>", // Название этапа, например, госпитализация
+  "stepStart" : [{ CodeableConcept }], // Условие для запуска этапа
+  "clinicalCondition" : { Reference(СlinicalCondition) }, // ссылка на условие после выполнения этапа
+  "predecessor" : { Reference(TrajectoryStep) }, // ссылка на этап-предшественник
+  "successor" : { Reference(TrajectoryStep) }, // ссылка на последующий этап
+  "subject" : { Reference(Patient|Group) }, // Для кого определяется этап траектории
+  "period" : { Period }, // Период времени, который охватывает этот шаг
+  "plan" : { Reference(PlanDefinition|CarePlan) }, // Какой план лечения относится к данному этапу.
+  "medicalRecords" : { Reference(Observation|Condition|DiagnosticReport|Patient|
+    Organization|ImagingStudy) }, // Какие данные были получены в результате этого шага
+  "stepOutcome " : [{ CodeableConcept }], // Результат этапа
+  "reasonCode" : [{ CodeableConcept }], // Цель этапа
+  "reasonReference" : [{ Reference(Condition) }], // Цель этапа
+  "managingOrganization" : [{ Reference(Organization) }], // Организация, ответственная за данный этап
+  "note" : [{ Annotation }] // Комментарии
+}
